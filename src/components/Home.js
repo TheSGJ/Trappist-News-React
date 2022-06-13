@@ -53,6 +53,14 @@ export default class Home extends Component {
       loading: false,
     }
   }
+  async componentsDidMount(){
+    let url = "/sample_data.json";
+    console.log("Debugging CDM!");
+    let data = async fetch(url);
+    let parsedData = asnyc data.json()
+    console.log(parsedData);
+    this.setState({articles: parsedData.articles})
+  }
   render() {
     return (
       
@@ -60,7 +68,7 @@ export default class Home extends Component {
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap -m-4">
               {this.state.articles.map((element)=>{
-                return <NewsItem key={element.url} title={element.title} description={element.description.slice(0,88)} imgUrl={element.urlToImage} newsUrl={element.url} />
+                return <NewsItem key={element.url} title={element.title} description={element.description?element.description.slice(0,88):""} imgUrl={element.urlToImage?element.urlToImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRID8CAckRSwj7DyX1BfOOohtFSUnfcPE9hag&usqp=CAU"} newsUrl={element.url} />
               })}
             </div>
           </div>
