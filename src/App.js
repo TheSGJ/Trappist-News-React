@@ -13,7 +13,7 @@ export default class App extends Component {
       <div>
         <Router>
           <Navbar />
-          <div className="App container" id="App">
+          <div className="App grid place-items-center" id="App">
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/about" element={<About />}></Route>
