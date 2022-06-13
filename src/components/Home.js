@@ -53,11 +53,11 @@ export default class Home extends Component {
       loading: false,
     }
   }
-  async componentsDidMount(){
+  async componentDidMount(){
     console.log("Debugging CDM!");
     let url = "/sample_data.json";
-    let data = async fetch(url);
-    let parsedData = asnyc data.json();
+    let data = await fetch(url);
+    let parsedData = await data.json();
     console.log(parsedData);
     this.setState({articles: parsedData.articles})
   }
