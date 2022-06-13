@@ -38,7 +38,10 @@ export default class Navbar extends Component {
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <span className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              <Link className="mx-1" to="/" onClick={this.clickNavClose}>Trappist News</Link>
+            <Link className="flex items-center" to="/" onClick={this.clickNavClose}>
+            <img src="logo192.png" className="mr-3 h-7 sm:h-9" alt="Trappist Logo" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Trappist News</span>
+            </Link>
             </span>
           </span>
           <div className="flex md:order-2">
