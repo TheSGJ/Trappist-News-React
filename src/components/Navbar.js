@@ -38,7 +38,7 @@ export default class Navbar extends Component {
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <span className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              <Link className="mx-1" to="/" onClick={this.clickNavClose}>Service TW</Link>
+              <Link className="mx-1" to="/" onClick={this.clickNavClose}>Trappist News</Link>
             </span>
           </span>
           <div className="flex md:order-2">
