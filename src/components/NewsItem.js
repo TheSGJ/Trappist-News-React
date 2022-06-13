@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class NewsItem extends Component {
   render() {
-    let {title, description, imgUrl} = this.props;
+    let {title, description, imgUrl, newsUrl} = this.props;
     return (
       
         <div className="p-4 md:w-1/3">
@@ -18,10 +18,10 @@ export class NewsItem extends Component {
                 {title}
               </h1>
               <p className="leading-relaxed mb-3">
-                {description}
+                {description}...
               </p>
               <div className="flex items-center flex-wrap ">
-                <a href="/" className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
+                <a href={newsUrl} rel="noreferrer" target="_blank" className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
                   Read More
                   <svg
                     className="w-4 h-4 ml-2"

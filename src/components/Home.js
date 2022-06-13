@@ -60,7 +60,7 @@ export default class Home extends Component {
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap -m-4">
               {this.state.articles.map((element)=>{
-                return <NewsItem key={element.url} title={element.title} description={element.description} imgUrl={element.urlToImage} newsUrl="TODO" />
+                return <NewsItem key={element.url} title={element.title} description={element.description.slice(0,88)} imgUrl={element.urlToImage} newsUrl={element.url} />
               })}
             </div>
           </div>
