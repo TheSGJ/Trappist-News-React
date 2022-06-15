@@ -47,14 +47,14 @@ export default class Home extends Component {
   // ]
   constructor(){
     super();
-    console.log("Debugging Home component constructer!")
+    // console.log("Debugging Home component constructer!")
     this.state = {
       articles: [],
       loading: false,
     }
   }
   async componentDidMount(){
-    console.log("Debugging CDM!");
+    // console.log("Debugging CDM!");
     let url = "/sample_data.json";
     let data = await fetch(url);
     let parsedData = await data.json()
