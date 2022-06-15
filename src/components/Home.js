@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 
 export default class Home extends Component {
-  
+  // Sample array for the data:
   // articles = [
   //   {
   //     "source": { "id": "reddit-r-all", "name": "Reddit /r/all" },
@@ -59,7 +59,7 @@ export default class Home extends Component {
     let data = await fetch(url);
     let parsedData = await data.json()
     console.log(parsedData);
-    this.setState({articles: parsedData})
+    this.setState({articles: parsedData.articles})
   }
   render() {
     return (

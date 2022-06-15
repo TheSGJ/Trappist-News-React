@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 
 export default class PopBlogItem extends Component {
+
   render() {
     let {blogTitle, blogDetail, blogImgUrl, blogUrl} = this.props;
+
     return (
         <div className="p-2 md:w-1/3">
         <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -16,9 +18,8 @@ export default class PopBlogItem extends Component {
             <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
               {blogTitle}
             </h1>
-            <p className="leading-relaxed mb-3">
-              {blogDetail}...
-            </p>
+            <p className="leading-relaxed mb-3" dangerouslySetInnerHTML={{__html: blogDetail}}/>
+       
             <div className="flex items-center flex-wrap ">
               <a href={blogUrl} rel="noreferrer" target="_blank" className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
                 Read More
