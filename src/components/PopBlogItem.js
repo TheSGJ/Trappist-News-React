@@ -9,15 +9,14 @@ export default class PopBlogItem extends Component {
         <div className="p-2 md:w-1/3">
         <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
           <img
+            loading='lazy'
             className="lg:h-48 md:h-36 w-full object-cover object-center"
             src={blogImgUrl}
             alt="blog"
           />
           <div className="p-6">
 
-            <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-              {blogTitle}
-            </h1>
+            <h1 className="title-font text-lg font-medium text-gray-900 mb-3" dangerouslySetInnerHTML={{__html: blogTitle}}/>
             <p className="leading-relaxed mb-3" dangerouslySetInnerHTML={{__html: blogDetail}}/>
        
             <div className="flex items-center flex-wrap ">
