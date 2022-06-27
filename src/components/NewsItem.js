@@ -8,6 +8,7 @@ export class NewsItem extends Component {
         <div className="p-4 md:w-1/3">
           <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
             <img
+              loading='lazy'
               className="lg:h-48 md:h-36 w-full object-cover object-center"
               src={imgUrl}
               alt="blog"
