@@ -34,9 +34,11 @@ export default class PopularBlogs extends Component {
     console.log("Previous Page")
   }
   handleNxtClick = async () =>{
-    if (this.state.page + 1 > Math.ceil(this.state.totalBlogResult/20)){
 
-    }else{
+    if (this.state.blogArticles===[]){
+
+    }
+    else{
         window.scrollTo(0, 0); 
         let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=20&context=embed&page=${this.state.page + 1}`;
         let result = await fetch(blogApi);
