@@ -17,6 +17,7 @@ export default class PopularBlogs extends Component {
     let result = await fetch(blogApi);
     let getResult = await result.json();
     let plGetResult = Object.keys(getResult).length
+    // Loging Number Post Objects
     console.log("Total Posts: "+plGetResult+" [Results]")
     console.log(getResult);
     this.setState({ blogArticles: getResult, totalBlogResult: plGetResult });
