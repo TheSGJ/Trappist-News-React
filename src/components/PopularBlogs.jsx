@@ -17,7 +17,8 @@ export default class PopularBlogs extends Component {
     let result = await fetch(blogApi);
     let getResult = await result.json();
     let plGetResult = Object.keys(getResult).length
-    console.log(plGetResult)
+    // Loging Number Post Objects
+    console.log("Total Posts: "+plGetResult+" [Results]")
     console.log(getResult);
     this.setState({ blogArticles: getResult, totalBlogResult: plGetResult });
   }
@@ -35,7 +36,7 @@ export default class PopularBlogs extends Component {
   }
   handleNxtClick = async () =>{
 
-    if (this.state.blogArticles===[]){
+    if (this.state.blogArticles.id === null ){
 
     }
     else{
