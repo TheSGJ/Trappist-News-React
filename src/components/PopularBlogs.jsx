@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PopBlogItem from "./PopBlogItem";
+import Spinner from "./Spinner";
 
 export default class PopularBlogs extends Component {
   constructor() {
@@ -13,18 +14,23 @@ export default class PopularBlogs extends Component {
   }
   async componentDidMount() {
     // console.log("Debugging PopularBlogs CDM!");
-    let blogApi = "https://techcrunch.com/wp-json/wp/v2/posts?per_page=20&context=embed&page=1";
+    let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=1`;
+    this.setState({ loading: true });
     let result = await fetch(blogApi);
     let getResult = await result.json();
     let plGetResult = Object.keys(getResult).length
     // Loging Number Post Objects
     console.log("Total Posts: "+plGetResult+" [Results]")
     console.log(getResult);
-    this.setState({ blogArticles: getResult, totalBlogResult: plGetResult });
+    this.setState({
+      blogArticles: getResult,
+      totalBlogResult: plGetResult,
+      loading: false
+    });
   }
   handlePreClick = async () =>{
     window.scrollTo(0, 0); 
-    let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=20&context=embed&page=${this.state.page - 1}`;
+    let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page - 1}`;
     let result = await fetch(blogApi);
     let getResult = await result.json();
     console.log(getResult);
@@ -36,18 +42,17 @@ export default class PopularBlogs extends Component {
   }
   handleNxtClick = async () =>{
 
-    if (this.state.blogArticles.id === null ){
-
-    }
-    else{
+    if (!(this.state.blogArticles.id === null)){
         window.scrollTo(0, 0); 
-        let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=20&context=embed&page=${this.state.page + 1}`;
+        let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page + 1}`;
+        this.setState({ loading: true });
         let result = await fetch(blogApi);
         let getResult = await result.json();
         console.log(getResult);
         this.setState({
           page: this.state.page + 1,
           blogArticles: getResult,
+          loading: false
         })
         console.log("Next Page")
   }
@@ -56,8 +61,9 @@ export default class PopularBlogs extends Component {
     return (
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
+        {this.state.loading && <Spinner />}
           <div className="flex flex-wrap -m-4">
-            {this.state.blogArticles.map((element) => {
+            {!this.state.loading && this.state.blogArticles.map((element) => {
               return (
                 <PopBlogItem
                   key={element.id}
@@ -85,6 +91,7 @@ export default class PopularBlogs extends Component {
              &larr; Previous
             </button>
             <button
+              disabled={this.state.blogArticles.id === null}
               onClick={this.handleNxtClick}
               className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
