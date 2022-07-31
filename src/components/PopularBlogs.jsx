@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import PopBlogItem from "./PopBlogItem";
 import Spinner from "./Spinner";
 
@@ -20,25 +21,28 @@ export default class PopularBlogs extends Component {
     let getResult = await result.json();
     let plGetResult = Object.keys(getResult).length
     // Loging Number Post Objects
-    console.log("Total Posts: "+plGetResult+" [Results]")
-    console.log(getResult);
+  
     this.setState({
       blogArticles: getResult,
       totalBlogResult: plGetResult,
-      loading: false
+      
+      loading: false,
+      
     });
+   
   }
   handlePreClick = async () =>{
     window.scrollTo(0, 0); 
     let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page - 1}`;
     let result = await fetch(blogApi);
     let getResult = await result.json();
-    console.log(getResult);
+
     this.setState({
       page: this.state.page - 1,
       blogArticles: getResult,
+      
     })
-    console.log("Previous Page")
+    
   }
   handleNxtClick = async () =>{
 
@@ -48,19 +52,26 @@ export default class PopularBlogs extends Component {
         this.setState({ loading: true });
         let result = await fetch(blogApi);
         let getResult = await result.json();
-        console.log(getResult);
+        
         this.setState({
           page: this.state.page + 1,
           blogArticles: getResult,
+          
           loading: false
         })
-        console.log("Next Page")
+        
   }
   }
+
   render() {
     return (
+      <>
+      <Helmet>
+        <title>Latest News - Trappist News</title>
+      </Helmet>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 py-4 mx-auto">
+        <h1 className="text-3xl font-bold text-center pb-2 mb-4">Latest Top Tech - Trappist News</h1>
         {this.state.loading && <Spinner />}
           <div className="flex flex-wrap -m-4">
             {!this.state.loading && this.state.blogArticles.map((element) => {
@@ -69,6 +80,10 @@ export default class PopularBlogs extends Component {
                   key={element.id}
                   blogTitle={element.title.rendered}
                   blogDetail={element.excerpt.rendered}
+                  blogSource={element.parsely.meta.publisher.name}
+                  
+                  blogAuthor={element.parsely.meta.creator}
+                  blogDate={element.date}
                   blogImgUrl={
                     element.jetpack_featured_media_url
                       ? element.jetpack_featured_media_url
@@ -80,26 +95,30 @@ export default class PopularBlogs extends Component {
             })}
           </div>
         </div>
-        <div className="container">
-          <>
-            <button
-              disabled={this.state.page<=1}
-              onClick={this.handlePreClick}
-              className="inline-flex items-center py-2 px-4 mr-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-            
-             &larr; Previous
-            </button>
-            <button
-              disabled={this.state.blogArticles.id === null}
-              onClick={this.handleNxtClick}
-              className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              Next &rarr;
-            </button>
-          </>
-        </div>
       </section>
+      <nav className="my-3" aria-label="Page navigation">
+          <ul className="inline-flex">
+            <li>
+              <button
+                disabled={this.state.page <= 1}
+                onClick={this.handlePreClick}
+                className="h-10 px-5 mx-1 text-indigo-600 transition-colors duration-150 bg-white border border-indigo-600 rounded focus:shadow-outline hover:bg-indigo-100"
+              >
+               &larr; Previous
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={this.handleNxtClick}
+                disabled={this.state.blogArticles.id === null}
+                className="h-10 px-5 mx-1 text-indigo-600 transition-colors duration-150 bg-white border border-indigo-600 rounded focus:shadow-outline hover:bg-indigo-100"
+              >
+                Next &rarr;
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </>
     );
   }
 }
