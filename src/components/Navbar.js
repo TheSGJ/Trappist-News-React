@@ -118,6 +118,56 @@ export default class Navbar extends Component {
                   Popular Blogs
                 </Link>
               </li>
+              {/* popular categories */}
+              <li>
+                <Link to="/business"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Business
+                </Link>
+              </li>
+              <li>
+                <Link to="/sports"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Sports
+                </Link>
+              </li>
+              <li>
+                <Link to="/technology"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Technology
+                </Link>
+              </li>
+              <li>
+                <Link to="/health"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                 Health
+                </Link>
+              </li>
+              <li>
+                <Link to="/science"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Science
+                </Link>
+              </li>
+              <li>
+                <Link to="/entertainment"
+                  onClick={this.clickNavClose}
+                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Entertainment
+                </Link>
+              </li>
+              {/* end popular categories */}
               <li>
                 <Link to="/services"
                   onClick={this.clickNavClose}

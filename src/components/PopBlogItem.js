@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class PopBlogItem extends Component {
 
   render() {
-    let {blogTitle, blogDetail, blogImgUrl, blogUrl} = this.props;
+    let {blogTitle, blogDetail, blogImgUrl, blogUrl, blogSource, blogAuthor, blogDate} = this.props;
 
     return (
         <div className="p-2 md:w-1/3">
@@ -15,10 +15,11 @@ export default class PopBlogItem extends Component {
             alt="blog"
           />
           <div className="p-6">
-
+          <span className="bg-indigo-100 mt-1/6 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">{blogSource}</span>
             <h1 className="title-font text-lg font-medium text-gray-900 mb-3" dangerouslySetInnerHTML={{__html: blogTitle}}/>
             <p className="leading-relaxed mb-3" dangerouslySetInnerHTML={{__html: blogDetail}}/>
-       
+            <h3 className="tracking-widest my-1 text-grey-500 text-xs font-medium title-font">{blogAuthor}</h3>
+            <h3 className="tracking-widest my-1 text-blue-500 text-xs font-bold title-font">{new Date(blogDate).toUTCString()}</h3>
             <div className="flex items-center flex-wrap ">
               <a href={blogUrl} rel="noreferrer" target="_blank" className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
                 Read More
