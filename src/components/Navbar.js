@@ -34,6 +34,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
+      <header className="sticky">
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <span className="flex items-center">
@@ -181,6 +182,7 @@ export default class Navbar extends Component {
           </div>
         </div>
       </nav>
+      </header>
     )
   }
 }

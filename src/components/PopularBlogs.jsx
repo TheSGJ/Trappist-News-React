@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import PopBlogItem from "./PopBlogItem";
 import Spinner from "./Spinner";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default class PopularBlogs extends Component {
   constructor() {
@@ -15,13 +16,15 @@ export default class PopularBlogs extends Component {
   }
   async componentDidMount() {
     // console.log("Debugging PopularBlogs CDM!");
+    this.props.setProgress(10)
     let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=1`;
     this.setState({ loading: true });
+    this.props.setProgress(40)
     let result = await fetch(blogApi);
     let getResult = await result.json();
     let plGetResult = Object.keys(getResult).length
     // Loging Number Post Objects
-  
+    this.props.setProgress(100)
     this.setState({
       blogArticles: getResult,
       totalBlogResult: plGetResult,
@@ -29,52 +32,44 @@ export default class PopularBlogs extends Component {
       loading: false,
       
     });
-   
+  //  console.log(this.state.blogArticles.id !== null)
   }
-  handlePreClick = async () =>{
-    window.scrollTo(0, 0); 
-    let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page - 1}`;
+
+  fetchMoreData = async () => {
+    this.setState({page: this.state.page + 1})
+    let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page + 1}`;
+    this.setState({ loading: true });
     let result = await fetch(blogApi);
     let getResult = await result.json();
-
-    this.setState({
-      page: this.state.page - 1,
-      blogArticles: getResult,
-      
-    })
     
+    this.setState({
+      
+      blogArticles: this.state.blogArticles.concat(getResult),
+      
+      loading: false
+    })
+ 
   }
-  handleNxtClick = async () =>{
-
-    if (!(this.state.blogArticles.id === null)){
-        window.scrollTo(0, 0); 
-        let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=${this.state.page + 1}`;
-        this.setState({ loading: true });
-        let result = await fetch(blogApi);
-        let getResult = await result.json();
-        
-        this.setState({
-          page: this.state.page + 1,
-          blogArticles: getResult,
-          
-          loading: false
-        })
-        
-  }
-  }
-
   render() {
     return (
       <>
       <Helmet>
         <title>Latest News - Trappist News</title>
       </Helmet>
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-4 mx-auto">
+      <section id="BlogMenu" style={{maxWidth: "70rem"}} className="text-gray-600 body-font">
+        <div className="px-5 py-4">
         <h1 className="text-3xl font-bold text-center pb-2 mb-4">Latest Top Tech - Trappist News</h1>
         {this.state.loading && <Spinner />}
-          <div className="flex flex-wrap -m-4">
-            {!this.state.loading && this.state.blogArticles.map((element) => {
+          <InfiniteScroll
+          style={{maxWidth: "70rem"}}
+          dataLength={this.state.blogArticles.length}
+          next={this.fetchMoreData}
+          hasMore={this.state.blogArticles.id !== null}
+          loader={<Spinner/>}
+        >
+          
+          <div style={{maxWidth: "70rem"}} className="flex flex-wrap -m-4">
+            {this.state.blogArticles.map((element) => {
               return (
                 <PopBlogItem
                   key={element.id}
@@ -94,30 +89,11 @@ export default class PopularBlogs extends Component {
               );
             })}
           </div>
+
+            </InfiniteScroll>
         </div>
       </section>
-      <nav className="my-3" aria-label="Page navigation">
-          <ul className="inline-flex">
-            <li>
-              <button
-                disabled={this.state.page <= 1}
-                onClick={this.handlePreClick}
-                className="h-10 px-5 mx-1 text-indigo-600 transition-colors duration-150 bg-white border border-indigo-600 rounded focus:shadow-outline hover:bg-indigo-100"
-              >
-               &larr; Previous
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={this.handleNxtClick}
-                disabled={this.state.blogArticles.id === null}
-                className="h-10 px-5 mx-1 text-indigo-600 transition-colors duration-150 bg-white border border-indigo-600 rounded focus:shadow-outline hover:bg-indigo-100"
-              >
-                Next &rarr;
-              </button>
-            </li>
-          </ul>
-        </nav>
+
       </>
     );
   }
