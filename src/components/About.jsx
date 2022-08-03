@@ -59,7 +59,7 @@ export default class About extends Component {
           </div>
           
             <span style={{ display: "flex", justifyContent: "center" }}>
-            <a href="https://github.com/TheSGJ/PyScript-ReplSite">
+            <a href="https://github.com/TheSGJ/Trappist-News-React">
               <svg
                 style={{ height: "30px", width: "30px" }}
                 version="1.1"

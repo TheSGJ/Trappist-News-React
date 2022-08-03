@@ -1,6 +1,7 @@
 # Trappist News React
 - Trappist News a news website, made using React Js class based components & It shows the latest news from the different news platforms. It uses newsapi.org API to provide news just by fetching news data from an API endpoint.
-# `this.state.api is the API key you have to get it from newsapi.org website.`
+## `this.props.apiKey // the API key you have to get it from newsapi.org website.`
+### `create a file named '.env.local' & in that REACT_APP_NEWS_API="your_apiKey" // put your apiKey in place of "your_apiKey"
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
