@@ -39,7 +39,7 @@ export default class Home extends Component {
     let parsedData = await data.json();
     
     this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
+      articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     });
@@ -50,8 +50,8 @@ export default class Home extends Component {
   }
 
   fetchMoreNews = async () =>{
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
     this.setState({page: this.state.page + 1})
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -64,22 +64,25 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <><section className="text-gray-600 body-font">
-          <div className="container px-5 py-4 mx-auto">
+      <>
+       <div className="container my-6 px-6 mx-auto">
+  <section className="mb-32 text-gray-800 text-center">
             <h1 className="text-3xl font-bold text-center pb-2 mb-4">{this.capitalize(this.props.category)} - Trappist News</h1>
             
-            <div className="my-4">
+           
             {this.state.loading && <Spinner />}
-            </div>
+           
             <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreNews}
           hasMore={this.state.articles.length !== this.state.totalResults}
           loader={<Spinner/>}
         >
-            <div className="flex flex-wrap -m-4">
+            <div className="grid lg:grid-cols-3 gap-6 xl:gap-x-12">
               {this.state.articles.map((element) => {
                   return (
+                    <div className="mb-6 lg:mb-0">
+        <div className="relative block bg-white rounded-lg shadow-lg">
                     <NewsItem
                       key={element.url + uuidv4()}
                       title={element.title}
@@ -94,16 +97,20 @@ export default class Home extends Component {
                           : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRID8CAckRSwj7DyX1BfOOohtFSUnfcPE9hag&usqp=CAU"
                       }
                       newsUrl={element.url}
-                      author={element.author}
+                      author={element.author?" by "+element.author:""}
                       source={element.source.name}
                       date={element.publishedAt}
                     />
+                    </div>
+                    </div>
                   );
                 })}
             </div>
+
           </InfiniteScroll>
+          </section>
           </div>
-        </section>
+        
 
       </>
     );
