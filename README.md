@@ -4,7 +4,7 @@
 ## `this.props.apiKey // the API key you have to get it from newsapi.org website.`
 ### `create a file named '.env.local' & in that REACT_APP_NEWS_API="your_apiKey" // put your apiKey in place of "your_apiKey"`
 ### Screenshots of the application:
-![PC preview](https://cdn.jsdelivr.net/gh/thesgj/Trappist-News-React/img/local-pc.png)
+![PC preview](https://cdn.jsdelivr.net/gh/thesgj/Trappist-News-React/img/local-pc.PNG)
 ![Phone preview](https://cdn.jsdelivr.net/gh/thesgj/Trappist-News-React/img/local-phone.png)
 - Checkout [Trappist News React Functional](https://github.com/TheSGJ/Trappist-News-React-Functional) its the same news react app but made using the react functional components.
 ## Steps required for configuring the project.
