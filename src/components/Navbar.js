@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar';
 export default class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
             navClassMenu: "hidden justify-between items-center w-full md:flex md:w-auto md:order-1",
             openMenuBar: "w-6 h-6",
-            closeMenuBar: "hidden w-6 h-6"
+            closeMenuBar: "hidden w-6 h-6",
+            ntProgress: 0
         };
       };
       showNavMenu = () => {
@@ -31,10 +33,24 @@ export default class Navbar extends Component {
             closeMenuBar: "hidden w-6 h-6"
         });
       }
+      clickLoadClose = () => {
+        this.setState({ ntProgress: this.state.ntProgress+10 })
+        this.setState({ ntProgress: this.state.ntProgress+20 })
+        this.setState({
+            navClassMenu: "hidden justify-between items-center w-full md:flex md:w-auto md:order-1",
+            openMenuBar: "w-6 h-6",
+            closeMenuBar: "hidden w-6 h-6"
+        });
+        this.setState({ ntProgress: this.state.ntProgress+40 })
+        this.setState({ ntProgress: this.state.ntProgress+60 })
+        this.setState({ ntProgress: this.state.ntProgress+100 })
+      }
 
   render() {
     return (
-      <header className="sticky">
+      <>
+      <LoadingBar color="#f11946" progress={this.state.ntProgress} onLoaderFinished={() => this.setState({ ntProgress:0 })} />
+      <header className="fixed-tp-nav">
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <span className="flex items-center">
@@ -46,7 +62,7 @@ export default class Navbar extends Component {
             </span>
           </span>
           <div className="flex md:order-2">
-              <Link to="/contact" onClick={this.clickNavClose}>
+              <Link to="/contact" onClick={this.clickLoadClose}>
             <button
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -105,7 +121,7 @@ export default class Navbar extends Component {
               </li>
               <li>
                 <Link to="/about"
-                  onClick={this.clickNavClose}
+                  onClick={this.clickLoadClose}
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   About
@@ -163,7 +179,7 @@ export default class Navbar extends Component {
               {/* end popular categories */}
               <li>
                 <Link to="/services"
-                  onClick={this.clickNavClose}
+                  onClick={this.clickLoadClose}
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Services
@@ -175,6 +191,8 @@ export default class Navbar extends Component {
         </div>
       </nav>
       </header>
+      <br /> <br />
+      </>
     )
   }
 }

@@ -18,7 +18,7 @@ export default class PopularBlogs extends Component {
     // console.log("Debugging PopularBlogs CDM!");
     this.props.setProgress(10)
     let blogApi = `https://techcrunch.com/wp-json/wp/v2/posts?per_page=${this.props.per_page}&context=embed&page=1`;
-    this.setState({ loading: true });
+    this.setState({ loading: false });
     this.props.setProgress(40)
     let result = await fetch(blogApi);
     let getResult = await result.json();
@@ -56,28 +56,29 @@ export default class PopularBlogs extends Component {
       <Helmet>
         <title>Latest News - Trappist News</title>
       </Helmet>
-      <section id="BlogMenu" style={{maxWidth: "70rem"}} className="text-gray-600 body-font">
-        <div className="px-5 py-4">
+      <div className="container my-6 px-6 mx-auto">
+  <section className="mb-32 text-gray-800 text-center">
         <h1 className="text-3xl font-bold text-center pb-2 mb-4">Latest Top Tech - Trappist News</h1>
         {this.state.loading && <Spinner />}
           <InfiniteScroll
-          style={{maxWidth: "70rem"}}
           dataLength={this.state.blogArticles.length}
           next={this.fetchMoreData}
           hasMore={this.state.blogArticles.id !== null}
           loader={<Spinner/>}
         >
           
-          <div style={{maxWidth: "70rem"}} className="flex flex-wrap -m-4">
+          <div className="grid lg:grid-cols-3 gap-6 xl:gap-x-12">
             {this.state.blogArticles.map((element) => {
               return (
+                <div className="mb-6 lg:mb-0">
+        <div className="relative block bg-white rounded-lg shadow-lg">
                 <PopBlogItem
                   key={element.id}
                   blogTitle={element.title.rendered}
                   blogDetail={element.excerpt.rendered}
                   blogSource={element.parsely.meta.publisher.name}
                   
-                  blogAuthor={element.parsely.meta.creator}
+                  blogAuthor={element.parsely.meta.creator?" by "+element.parsely.meta.creator:""}
                   blogDate={element.date}
                   blogImgUrl={
                     element.jetpack_featured_media_url
@@ -86,13 +87,15 @@ export default class PopularBlogs extends Component {
                   }
                   blogUrl={element.link}
                 />
+                </div>
+                </div>
               );
             })}
           </div>
 
             </InfiniteScroll>
-        </div>
       </section>
+        </div>
 
       </>
     );
