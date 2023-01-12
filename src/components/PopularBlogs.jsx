@@ -59,8 +59,8 @@ export default class PopularBlogs extends Component {
                   blogAuthor="Times Of India"
                   blogDate={element.pubDate?element.pubDate:"???"}
                   blogImgUrl={
-                    element.enclosure.@url
-                      ? element.enclosure.@url
+                    element.link
+                      ? element.link
                       : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRID8CAckRSwj7DyX1BfOOohtFSUnfcPE9hag&usqp=CAU"
                   }
                   blogUrl={element.link?element.link:"/"}
