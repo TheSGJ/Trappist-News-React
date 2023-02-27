@@ -76,9 +76,8 @@ export default class PopularBlogs extends Component {
                   key={element.id}
                   blogTitle={element.title.rendered?element.title.rendered:">>>>>>????>>>>>>"}
                   blogDetail={element.excerpt.rendered?element.excerpt.rendered:"......"}
-                  blogSource={element.parsely.meta.publisher.name?element.parsely.meta.publisher.name:"N/A"}
-                  
-                  blogAuthor={element.parsely.meta.creator?" by "+element.parsely.meta.creator:""}
+                  blogSource="Tech Crunch"
+                  blogAuthor=""
                   blogDate={element.date}
                   blogImgUrl={
                     element.jetpack_featured_media_url
