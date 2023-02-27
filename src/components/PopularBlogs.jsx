@@ -74,9 +74,9 @@ export default class PopularBlogs extends Component {
         <div className="relative block bg-white rounded-lg shadow-lg">
                 <PopBlogItem
                   key={element.id}
-                  blogTitle={element.title.rendered}
-                  blogDetail={element.excerpt.rendered}
-                  blogSource={element.parsely.meta.publisher.name}
+                  blogTitle={element.title.rendered?element.title.rendered:">>>>>>????>>>>>>"}
+                  blogDetail={element.excerpt.rendered?element.excerpt.rendered:"......"}
+                  blogSource={element.parsely.meta.publisher.name?element.parsely.meta.publisher.name:"N/A"}
                   
                   blogAuthor={element.parsely.meta.creator?" by "+element.parsely.meta.creator:""}
                   blogDate={element.date}
